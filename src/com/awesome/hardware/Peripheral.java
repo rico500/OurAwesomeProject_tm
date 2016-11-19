@@ -38,13 +38,13 @@ public abstract class Peripheral {
     public static void setColourSmoothly(Colour c, long dMillis){
 
         int dR = computeStep(prevColour.r, c.r, (int) dMillis);
-        int dG = computeStep(prevColour.g, c.g, (int) dMillis);
-        int dB = computeStep(prevColour.b, c.b, (int) dMillis);
+        int dG = Integer.compare(prevColour.g, c.g);
+        int dB = Integer.compare(prevColour.b, c.b);
         int dA = computeStep(prevColour.a, c.a, (int) dMillis);
 
-        Colour dColour = new Colour(dR, dG, dB, dA);
+        Colour dColour = new Colour(Integer.compare(prevColour.r, c.r), dG, dB, 255);
 
-        for (int i = 0; i<dMillis; ++i){
+        while(!prevColour.equals(c)){
             setColor(prevColour);
             prevColour.add(dColour);
             sleep(1);
