@@ -1,33 +1,51 @@
 package com.awesome;
 import com.awesome.cognitive.Colours;
 import com.awesome.cognitive.Emotion;
+import com.awesome.cognitive.EmotionEnum;
 import com.awesome.cognitive.Colour;
 
 import java.lang.Thread;
 
-import com.awesome.cognitive.EmotionEnum;
-import com.awesome.hardware.Headset;
-import com.awesome.hardware.Keyboard;
-import com.awesome.hardware.Mouse;
-import com.awesome.hardware.WebcamSupport;
+import com.awesome.hardware.*;
 
 public class Main {
 
-    private static final long delay = 35;
+    private static final boolean hardware_on = false;
+    private static final long delay = 100;
 
     public static void main(String[] args) {
-	    // write your code here
+	// write your code here
         WebcamSupport.init();
-        //WebcamSupport.showWebCamLiveFeed();
-        Keyboard.init();
-        Mouse.init();
-        Headset.init();
-        /*
+        WebcamSupport.showWebCamLiveFeed();
+
+        if(hardware_on) {
+            Keyboard.init();
+            Mouse.init();
+            Headset.init();
+        }
+
+        //testEmotionRecognition();
+
+        //runThroughEmotions();
+
+        testBanner(KeyboardPresets.ARROW_RIGHT);
+
+        Keyboard.shutdown();
+        Mouse.shutdown();
+        Headset.shutdown();
+
+    }
+
+    private static void testBanner(byte[][] drawing) {
+        Keyboard.bannerFullSpinRight(drawing, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR), 20000);
+    }
+
+    private static void testEmotionRecognition() {
         try {
 
             while (true) {
                 Thread.sleep(delay);
-                    String s = Emotion.getEmotion(WebcamSupport.getSnapshot());
+                    String s = Emotion.getEmotionJSON(WebcamSupport.getSnapshot());
                     s = s.substring(1, s.length() - 1);
                     System.out.println(s);
 
@@ -39,7 +57,11 @@ public class Main {
                             Colour c = Colours.multiConvert(s);
                             System.out.println(c.toString());
 
-                            setPeripheralsColor(c);
+                            if(hardware_on) {
+                                Keyboard.setColor(c);
+                                Mouse.setColor(c);
+                                Headset.setColourSmoothly(c, delay);
+                            }
                         }catch(org.json.JSONException e){
                             System.err.println("Parsing error! JSON : " + s);
                         }
@@ -52,16 +74,11 @@ public class Main {
 
         }
         catch(InterruptedException e){
-            Keyboard.shutdown();
+            if(hardware_on) {
+                Keyboard.shutdown();
+            }
             System.out.print(e.getMessage());
         }
-        */
-        runThroughEmotions();
-
-        Keyboard.shutdown();
-        Mouse.shutdown();
-        Headset.shutdown();
-
     }
 
     private static void setPeripheralsColor(Colour c) {
@@ -72,10 +89,9 @@ public class Main {
 
     private static void runThroughEmotions(){
         for (EmotionEnum e : EmotionEnum.values()){
-            System.out.println(e + " " + Colours.singleEmotion(e));
             setPeripheralsColor(Colours.singleEmotion(e));
             try {
-                Thread.sleep(500);
+                Thread.sleep(2000);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }

@@ -8,25 +8,10 @@ import com.logitech.gaming.LogiLED;
  */
 public class Keyboard extends Peripheral{
 
-    private static final int ROWS = 6, COLS = 21, NB_OF_BYTES_PER_KEY = 4;
+    private static final int ROWS = 6, COLS = 21, NB_OF_BYTES_PER_KEY = 4, CENTER_KEYS = 14;
 
     public static void setUpperRow(int r, int g, int b, int a){
-        byte[] RGBAarray = new byte[NB_OF_BYTES_PER_KEY*COLS*ROWS];
-        for (int i = 0; i < NB_OF_BYTES_PER_KEY*COLS*ROWS; i++) {
-            if (i < NB_OF_BYTES_PER_KEY*20) {
-                if (i%NB_OF_BYTES_PER_KEY==0)
-                    RGBAarray[i] = (byte) b;
-                else if(i%NB_OF_BYTES_PER_KEY==1)
-                    RGBAarray[i] = (byte) g;
-                else if(i%NB_OF_BYTES_PER_KEY==2)
-                    RGBAarray[i] = (byte) r;
-                else if(i%NB_OF_BYTES_PER_KEY==3)
-                    RGBAarray[i] = (byte) a;
-            } else {
-                RGBAarray[i] = 0x00 & 0x00 & 0x00 & 0x00;
-            }
-        }
-        LogiLED.LogiLedSetLightingFromBitmap(RGBAarray);
+        setDrawing(KeyboardPresets.UPPER_ROW, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.DISGUST));
     }
 
     public static void setCyclingColors(int time, Colour... colors){
@@ -36,9 +21,9 @@ public class Keyboard extends Peripheral{
     }
 
     public static void setDrawing(byte[][] drawing, Colour c0, Colour c1){
-       /* if (drawing.length != COLS && drawing[0].length != ROWS){
+        if (drawing.length != COLS && drawing[0].length != ROWS){
             throw new IllegalArgumentException("Wrong drawing dimensions !!!");
-        }*/
+        }
         byte[] RGBAarray = new byte[NB_OF_BYTES_PER_KEY*COLS*ROWS];
         int i = 0;
         for (int row = 0; row<drawing.length; row++){
@@ -63,11 +48,34 @@ public class Keyboard extends Peripheral{
 
         LogiLED.LogiLedSetLightingFromBitmap(RGBAarray);
     }
-/*
-    public static void drawWord(String word){
-        for (int i = 0; i < word.length(); i++)
-        {
-            LogiLED.LogiLedSetLightingForKeyWithKeyName();
+
+    private static byte[][] offsetDrawingHorizontaly(byte[][] drawing, int offset){
+        byte[][] array = new byte[drawing.length][drawing[0].length];
+        for (int r = 0; r<drawing.length; ++r){
+            for(int c = 0; c<drawing[c].length; ++c){
+                array[r][(c+offset) % CENTER_KEYS] = drawing[r][c];
+            }
         }
-    }*/
+
+        return array;
+    }
+
+    public static void bannerFullSpinRight(byte[][] drawing, Colour c0, Colour c1, long duration){
+
+        duration = duration/CENTER_KEYS;
+
+        for (int i = 0; i<CENTER_KEYS; ++i){
+            setDrawing(offsetDrawingHorizontaly(drawing, i), c0, c1);
+            sleep(duration);
+        }
+
+    }
+
+    private static void sleep(long millis){
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
