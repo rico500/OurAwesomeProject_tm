@@ -39,6 +39,7 @@ public class WebcamSupport {
      * @return byte array of jpeg format
      */
     public static byte[] getSnapshot(){
+        webcam.open();
         return WebcamUtils.getImageBytes(webcam, ImageUtils.FORMAT_JPG);
     }
 }
