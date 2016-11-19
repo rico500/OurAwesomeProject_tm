@@ -7,6 +7,7 @@ import com.github.sarxos.webcam.WebcamUtils;
 import com.github.sarxos.webcam.util.ImageUtils;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Danil on 19.11.16.
@@ -39,6 +40,7 @@ public class WebcamSupport {
      * @return byte array of jpeg format
      */
     public static byte[] getSnapshot(){
+        webcam.setViewSize(new Dimension(200, 200));
         webcam.open();
         return WebcamUtils.getImageBytes(webcam, ImageUtils.FORMAT_JPG);
     }
