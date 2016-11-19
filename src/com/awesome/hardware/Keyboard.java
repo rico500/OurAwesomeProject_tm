@@ -6,7 +6,7 @@ import com.logitech.gaming.LogiLED;
  */
 public class Keyboard {
 
-    public void setColor(int r, int g, int b){
+    public static void setColor(int r, int g, int b){
         LogiLED.LogiLedInit();
         LogiLED.LogiLedSetLighting(r, g, b);
         LogiLED.LogiLedShutdown();
