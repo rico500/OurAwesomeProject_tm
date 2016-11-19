@@ -6,9 +6,21 @@ import com.logitech.gaming.LogiLED;
  */
 public class Keyboard {
 
-    public static void setColor(int r, int g, int b){
+    public static void initKeyboard()
+    {
         LogiLED.LogiLedInit();
-        LogiLED.LogiLedSetLighting(r, g, b);
+        try{
+            Thread.sleep(500);
+        } catch(Exception e){
+        }
+    }
+
+    public static void shutdownKeyboard()
+    {
         LogiLED.LogiLedShutdown();
+    }
+
+    public static void setColor(int r, int g, int b){
+        LogiLED.LogiLedSetLighting((r/255)*100, (g/255)*100,(b/255)*100);
     }
 }
