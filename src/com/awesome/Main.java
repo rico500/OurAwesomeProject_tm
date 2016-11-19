@@ -1,5 +1,7 @@
 package com.awesome;
+import com.awesome.cognitive.Colours;
 import com.awesome.cognitive.Emotion;
+import com.awesome.cognitive.Colour;
 
 import java.lang.Thread;
 
@@ -17,7 +19,14 @@ public class Main {
 
             while (true) {
                 Thread.sleep(2000);
-                System.out.println(Emotion.getEmotion(WebcamSupport.getSnapshot()));
+                String s = Emotion.getEmotion(WebcamSupport.getSnapshot());
+                s = s.substring(1,s.length()-1);
+                System.out.println(s);
+                if(!s.equalsIgnoreCase("[]")){
+                    Colour c = Colours.generateColour(s);
+
+                }
+
                 //Keyboard.setColor(0, 255, 0);
             }
 
