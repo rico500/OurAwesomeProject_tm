@@ -77,19 +77,11 @@ public class Emotion {
 
             // Request body
 
-            // String Entity test
-            // StringEntity reqEntity = new StringEntity("{ \"url\": \"http://pngimg.com/upload/face_PNG11761.png\" }");
-
             // File Entity test
-           Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
+            Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
             File imagefile = new File(imagepath.toString());
 
             System.out.println("Found Image at: " + imagepath.toString());
-            /*BufferedImage bufferedImage = ImageIO.read(imagefile);
-
-            // get DataBufferBytes from Raster
-            WritableRaster raster = bufferedImage .getRaster();
-            DataBufferByte imagedata   = (DataBufferByte) raster.getDataBuffer();*/
 
             System.out.println(Files.readAllBytes(imagefile.toPath()));
             ByteArrayEntity reqEntity = new ByteArrayEntity(Files.readAllBytes(imagefile.toPath()),
