@@ -1,6 +1,7 @@
 package com.awesome;
 import com.awesome.cognitive.Colours;
 import com.awesome.cognitive.Emotion;
+import com.awesome.cognitive.EmotionEnum;
 import com.awesome.cognitive.Colour;
 
 import java.lang.Thread;
@@ -12,6 +13,7 @@ import com.awesome.hardware.WebcamSupport;
 
 public class Main {
 
+    private static final boolean hardware_on = false;
     private static final long delay = 100;
 
     public static void main(String[] args) {
@@ -29,7 +31,7 @@ public class Main {
 
             while (true) {
                 Thread.sleep(delay);
-                    String s = Emotion.getEmotion(WebcamSupport.getSnapshot());
+                    String s = Emotion.getEmotionJSON(WebcamSupport.getSnapshot());
                     s = s.substring(1, s.length() - 1);
                     System.out.println(s);
 
@@ -63,7 +65,7 @@ public class Main {
             }
             System.out.print(e.getMessage());
         }
-        */
+
         runThroughEmotions();
 
         Keyboard.shutdown();
