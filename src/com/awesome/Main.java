@@ -28,7 +28,8 @@ public class Main {
 
                         try {
 
-                            Colour c = Colours.generateColour(s);
+                            //Colour c = Colours.generateColour(s);
+                            Colour c = Colours.multiConvert(s);
                             System.out.println(c.toString());
 
                             Keyboard.setColor(c);

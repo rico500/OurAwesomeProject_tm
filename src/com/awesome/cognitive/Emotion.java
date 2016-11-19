@@ -1,5 +1,6 @@
 package com.awesome.cognitive;
 
+import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
 import java.io.File;
@@ -82,44 +83,16 @@ public class Emotion {
      * test function that uses test.jpg to see if the service is working and byte conversion is ok.
      */
     public static void getEmotion(){
+        Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
+        File imagefile = new File(imagepath.toString());
 
-        HttpClient httpclient = HttpClients.createDefault();
+        System.out.println("Found Image at: " + imagepath.toString());
 
-        try
-        {
-            URIBuilder builder = new URIBuilder("https://api.projectoxford.ai/emotion/v1.0/recognize");
-
-
-            URI uri = builder.build();
-            HttpPost request = new HttpPost(uri);
-            request.setHeader("Content-Type", "application/octet-stream");
-            request.setHeader("Ocp-Apim-Subscription-Key", "b2e7ad2e399f4afb9be3096d50a98a93");
-
-
-            // Request body
-
-            // File Entity test
-            Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
-            File imagefile = new File(imagepath.toString());
-
-            System.out.println("Found Image at: " + imagepath.toString());
-
+        try {
             System.out.println(Files.readAllBytes(imagefile.toPath()));
-            ByteArrayEntity reqEntity = new ByteArrayEntity(Files.readAllBytes(imagefile.toPath()),
-                    ContentType.create("application/octet-stream"));
-
-            request.setEntity(reqEntity);
-
-            HttpResponse response = httpclient.execute(request);
-            HttpEntity entity = response.getEntity();
-
-            if (entity != null)
-            {
-                System.out.println(EntityUtils.toString(entity));
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
+            getEmotion(Files.readAllBytes(imagefile.toPath()));
+        }catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 

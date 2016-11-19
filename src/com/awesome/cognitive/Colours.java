@@ -18,6 +18,36 @@ public class Colours {
     /**
      *
      * @param jsonString String formatted as valid JSON containing emotion data from Cognitive Emotion API.
+     * @return Average colour as per the singleEmotion method, with individual colour influences scaled proportionally \
+     * to their individual scales
+     */
+    public static Colour multiConvert(String jsonString){
+        JSONObject js = new JSONObject(jsonString);
+        Colour[] cs = new Colour[8];
+
+        cs[0] = singleEmotion(EmotionEnum.ANGER);
+        cs[0].scale = js.getJSONObject("scores").getDouble("anger");
+        cs[1] = singleEmotion(EmotionEnum.CONTEMPT);
+        cs[1].scale = js.getJSONObject("scores").getDouble("contempt");
+        cs[2] = singleEmotion(EmotionEnum.DISGUST);
+        cs[2].scale = js.getJSONObject("scores").getDouble("disgust");
+        cs[3] = singleEmotion(EmotionEnum.FEAR);
+        cs[3].scale = js.getJSONObject("scores").getDouble("fear");
+        cs[4] = singleEmotion(EmotionEnum.HAPPINESS);
+        cs[4].scale = js.getJSONObject("scores").getDouble("happiness");
+        cs[5] = singleEmotion(EmotionEnum.NEUTRAL);
+        cs[5].scale = js.getJSONObject("scores").getDouble("neutral");
+        cs[6] = singleEmotion(EmotionEnum.SADNESS);
+        cs[6].scale = js.getJSONObject("scores").getDouble("sadness");
+        cs[7] = singleEmotion(EmotionEnum.SURPRISE);
+        cs[7].scale = js.getJSONObject("scores").getDouble("surprise");
+
+        return Colour.scaleAdd(cs);
+    }
+
+    /**
+     *
+     * @param jsonString String formatted as valid JSON containing emotion data from Cognitive Emotion API.
      * @return EmotionEnum corresponding to the dominant emotion of first face in picture.
      */
     public static EmotionEnum singleConvert(String jsonString){
