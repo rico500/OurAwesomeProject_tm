@@ -26,7 +26,18 @@ import org.apache.http.entity.ContentType;
  */
 public class Emotion {
 
-    public static void getEmotion(byte[] imageByteArray){
+    /**
+     * getEmotion
+     *
+     * Get intent in image stored in byte arrray.
+     * See https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa
+     *
+     * @param byte[] imageByteArray image as an array of bytes (can't exceed 4Mb or )
+     *
+     * @return String image intent json as a string
+     */
+
+    public static String getEmotion(byte[] imageByteArray){
 
         HttpClient httpclient = HttpClients.createDefault();
 
@@ -37,11 +48,12 @@ public class Emotion {
 
             URI uri = builder.build();
             HttpPost request = new HttpPost(uri);
-            request.setHeader("Content-Type", "application/json");
+            request.setHeader("Content-Type", "application/octet-stream");
             request.setHeader("Ocp-Apim-Subscription-Key", "b2e7ad2e399f4afb9be3096d50a98a93");
 
 
             // Request body
+
             ByteArrayEntity reqEntity = new ByteArrayEntity(imageByteArray,
                     ContentType.create("application/octet-stream"));
 
@@ -52,14 +64,23 @@ public class Emotion {
 
             if (entity != null)
             {
-                System.out.println(EntityUtils.toString(entity));
+                String jsonOutput = EntityUtils.toString(entity);
+                //System.out.println(jsonOutput);
+                return jsonOutput;
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return null;
     }
 
+
+    /**
+     * getEmotion
+     *
+     * test function that uses test.jpg to see if the service is working and byte conversion is ok.
+     */
     public static void getEmotion(){
 
         HttpClient httpclient = HttpClients.createDefault();
