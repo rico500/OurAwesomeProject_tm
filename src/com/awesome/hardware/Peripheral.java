@@ -26,7 +26,12 @@ public abstract class Peripheral {
     }
 
     public static void setColor(int r, int g, int b) {
-        LogiLED.LogiLedPulseLighting((r/255)*100, (g/255)*100,(b/255)*100, 2000, 1000);
+        double red = (double)r/255.0;
+        double green = (double)g/255.0;
+        double blue = (double)b/255.0;
+        System.out.println(red + " " + green + " " + blue);
+        LogiLED.LogiLedSetLighting((int) (red*100),(int) (green*100),(int) (blue*100));
+        //LogiLED.LogiLedPulseLighting((r/255)*100, (g/255)*100,(b/255)*100, 2000, transitionMilliSecondsInterval);
     }
 
     public static void setColor(Colour c){
