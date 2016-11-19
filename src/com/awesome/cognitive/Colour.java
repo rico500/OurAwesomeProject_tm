@@ -6,6 +6,7 @@ package com.awesome.cognitive;
 public class Colour {
 
     public int r, g, b, a;
+    public double scale;
 
     public Colour(int r, int g, int b){
         this.r = check(r);
@@ -30,6 +31,19 @@ public class Colour {
         g = c.g;
         b = c.b;
         a = (a + c.a) / 2;
+    }
+
+    public static Colour scaleAdd(Colour[] cs){
+        double r = 0, g = 0, b = 0, a = 0;
+
+        for (Colour c : cs){
+            r += c.r * c.scale;
+            g += c.g * c.scale;
+            b += c.b * c.scale;
+            a += c.a * c.scale;
+        }
+
+        return new Colour((int) r, (int) g, (int) b, (int) a);
     }
 
     @Override
