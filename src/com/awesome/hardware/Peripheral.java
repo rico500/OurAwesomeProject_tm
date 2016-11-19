@@ -42,13 +42,20 @@ public abstract class Peripheral {
         int dB = computeStep(prevColour.b, c.b, (int) dMillis);
         int dA = computeStep(prevColour.a, c.a, (int) dMillis);
 
-        Colour dColour = new Colour(dR, dG, dB, dA);
+        while (prevColour.r <= c.r || prevColour.r <= c.r || prevColour.r <= c.r){
+            if (prevColour.r <= c.r){
+                prevColour.r += dR;
+            }
 
-        for (int i = 0; i<dMillis; ++i){
-            setColor(prevColour);
-            prevColour.add(dColour);
-            sleep(1);
+            if (prevColour.g <= c.g){
+                prevColour.g += dG;
+            }
+
+            if (prevColour.b <= c.b){
+                prevColour.b += dB;
+            }
         }
+
 
     }
 
