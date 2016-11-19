@@ -13,6 +13,8 @@ public abstract class Peripheral {
             Thread.sleep(500);
         } catch(Exception e){
         }
+        LogiLED.LogiLedSaveCurrentLighting();
+        setColor(0,0,0);
     }
 
     public static void shutdown() {
