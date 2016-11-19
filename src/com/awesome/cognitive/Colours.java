@@ -87,25 +87,25 @@ public class Colours {
                 c = new Colour(255, 0, 0);
                 break;
             case CONTEMPT:
-                c = new Colour(255, 255, 0);
+                c = new Colour(216, 0, 116);
                 break;
             case DISGUST:
-                c = new Colour(0, 255, 0);
+                c = new Colour(136, 0, 177);
                 break;
             case FEAR:
-                c = new Colour(0, 255, 255);
+                c = new Colour(253, 241, 71);
                 break;
             case HAPPINESS:
-                c = new Colour(255/2, 255/2, 255/2);
+                c = new Colour(0, 210, 72);
                 break;
             case NEUTRAL:
                 c = new Colour(0, 0, 0);
                 break;
             case SADNESS:
-                c = new Colour(0, 0, 255);
+                c = new Colour(0, 69, 147);
                 break;
             case SURPRISE:
-                c = new Colour(255, 0, 255);
+                c = new Colour(236, 180, 0);
                 break;
             default:
                 c = new Colour(0,0,0,0);

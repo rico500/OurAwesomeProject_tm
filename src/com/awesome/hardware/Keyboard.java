@@ -36,9 +36,9 @@ public class Keyboard extends Peripheral{
     }
 
     public static void setDrawing(byte[][] drawing, Colour c0, Colour c1){
-        if (drawing.length != COLS && drawing[0].length != ROWS){
+       /* if (drawing.length != COLS && drawing[0].length != ROWS){
             throw new IllegalArgumentException("Wrong drawing dimensions !!!");
-        }
+        }*/
         byte[] RGBAarray = new byte[NB_OF_BYTES_PER_KEY*COLS*ROWS];
         int i = 0;
         for (int row = 0; row<drawing.length; row++){
@@ -63,4 +63,11 @@ public class Keyboard extends Peripheral{
 
         LogiLED.LogiLedSetLightingFromBitmap(RGBAarray);
     }
+/*
+    public static void drawWord(String word){
+        for (int i = 0; i < word.length(); i++)
+        {
+            LogiLED.LogiLedSetLightingForKeyWithKeyName();
+        }
+    }*/
 }
