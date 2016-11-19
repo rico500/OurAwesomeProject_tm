@@ -31,4 +31,9 @@ public class Colour {
         b = c.b;
         a = (a + c.a) / 2;
     }
+
+    @Override
+    public String toString(){
+        return r + ", " + g + ", " + b + ", " + a;
+    }
 }
