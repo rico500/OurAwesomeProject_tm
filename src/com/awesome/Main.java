@@ -8,13 +8,14 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        WebcamSupport.showWebCamLiveFeed();
-        Keyboard.initKeyboard();
+        //WebcamSupport.showWebCamLiveFeed();
+        //Keyboard.initKeyboard();
+        Emotion.getEmotion();
 
-        while(true){
+        /*while(true){
             WebcamSupport.getSnapshot();
             Keyboard.setColor(0, 255, 0);
-        }
+        }*/
         //Keyboard.shutdownKeyboard();
     }
 }
