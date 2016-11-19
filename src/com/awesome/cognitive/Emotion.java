@@ -4,10 +4,12 @@ import java.net.URI;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.http.entity.StringEntity;
+
 /**
  * Created by ebrunner on 19/11/16.
  */
@@ -29,7 +31,15 @@ public class Emotion {
 
 
             // Request body
-            StringEntity reqEntity = new StringEntity("{body}");
+
+            // String Entity test
+            StringEntity reqEntity = new StringEntity("{ \"url\": \"http://pngimg.com/upload/face_PNG11761.png\" }");
+
+            // File Entity test
+            File file = new File("");
+            FileEntity entity = new FileEntity(file,
+                    ContentType.create("text/plain", "UTF-8"));
+
             request.setEntity(reqEntity);
 
             HttpResponse response = httpclient.execute(request);
