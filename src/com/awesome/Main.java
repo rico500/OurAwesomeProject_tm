@@ -5,23 +5,27 @@ import com.awesome.cognitive.Colour;
 
 import java.lang.Thread;
 
+import com.awesome.hardware.Headset;
 import com.awesome.hardware.Keyboard;
+import com.awesome.hardware.Mouse;
 import com.awesome.hardware.WebcamSupport;
 
 public class Main {
 
+    private static final long delay = 100;
+
     public static void main(String[] args) {
 	// write your code here
         WebcamSupport.init();
-    //    WebcamSupport.showWebCamLiveFeed();
-//        Keyboard.init();
-//        Mouse.init();
-//        Headset.init();
+        WebcamSupport.showWebCamLiveFeed();
+        Keyboard.init();
+        Mouse.init();
+        Headset.init();
 
         try {
 
             while (true) {
-                    Thread.sleep(100);
+                Thread.sleep(delay);
                     String s = Emotion.getEmotion(WebcamSupport.getSnapshot());
                     s = s.substring(1, s.length() - 1);
                     System.out.println(s);
@@ -34,9 +38,9 @@ public class Main {
                             Colour c = Colours.multiConvert(s);
                             System.out.println(c.toString());
 
-                            //Keyboard.setColor(c);
-                            //Mouse.setColor(c);
-                            //Headset.setColor(c);
+                            Keyboard.setColor(c);
+                            Mouse.setColor(c);
+                            Headset.setColourSmoothly(c, delay);
                         }catch(org.json.JSONException e){
                             System.err.println("Parsing error! JSON : " + s);
                         }
@@ -49,7 +53,7 @@ public class Main {
 
         }
         catch(InterruptedException e){
-            //Keyboard.shutdown();
+            Keyboard.shutdown();
             System.out.print(e.getMessage());
             }
     }

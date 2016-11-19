@@ -26,6 +26,7 @@ public abstract class Peripheral {
     }
 
     public static void setColor(int r, int g, int b) {
+        prevColour = new Colour(r, g, b, 255);
         double red = (double)r/255.0;
         double green = (double)g/255.0;
         double blue = (double)b/255.0;
@@ -34,7 +35,37 @@ public abstract class Peripheral {
         //LogiLED.LogiLedPulseLighting((r/255)*100, (g/255)*100,(b/255)*100, 2000, transitionMilliSecondsInterval);
     }
 
+    public static void setColourSmoothly(Colour c, long dMillis){
+
+        int dR = computeStep(prevColour.r, c.r, (int) dMillis);
+        int dG = computeStep(prevColour.g, c.g, (int) dMillis);
+        int dB = computeStep(prevColour.b, c.b, (int) dMillis);
+        int dA = computeStep(prevColour.a, c.a, (int) dMillis);
+
+        Colour dColour = new Colour(dR, dG, dB, dA);
+
+        for (int i = 0; i<dMillis; ++i){
+            setColor(prevColour);
+            prevColour.add(dColour);
+            sleep(1);
+        }
+
+    }
+
+    private static void sleep(long millis){
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static int computeStep(int from, int to, int totSteps){
+        return (to-from)/totSteps;
+    }
+
     public static void setColor(Colour c){
+        prevColour = new Colour(c);
         setColor(c.r, c.g, c.b);
     }
 }

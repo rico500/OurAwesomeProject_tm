@@ -22,6 +22,13 @@ public class Colour {
         this.a = check(a);
     }
 
+    public Colour(Colour c){
+        r = c.r;
+        g = c.g;
+        b = c.b;
+        a = c.a;
+    }
+
     private int check(int k){
         return Math.max(Math.min(k, 255),0);
     }
