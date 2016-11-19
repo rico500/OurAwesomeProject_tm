@@ -25,21 +25,21 @@ public class Colours {
         JSONObject js = new JSONObject(jsonString);
         Colour[] cs = new Colour[8];
 
-        cs[0].add(singleEmotion(EmotionEnum.ANGER));
+        cs[0] = singleEmotion(EmotionEnum.ANGER);
         cs[0].scale = js.getJSONObject("scores").getDouble("anger");
-        cs[1].add(singleEmotion(EmotionEnum.CONTEMPT));
+        cs[1] = singleEmotion(EmotionEnum.CONTEMPT);
         cs[1].scale = js.getJSONObject("scores").getDouble("contempt");
-        cs[2].add(singleEmotion(EmotionEnum.DISGUST));
+        cs[2] = singleEmotion(EmotionEnum.DISGUST);
         cs[2].scale = js.getJSONObject("scores").getDouble("disgust");
-        cs[3].add(singleEmotion(EmotionEnum.FEAR));
+        cs[3] = singleEmotion(EmotionEnum.FEAR);
         cs[3].scale = js.getJSONObject("scores").getDouble("fear");
-        cs[4].add(singleEmotion(EmotionEnum.HAPPINESS));
+        cs[4] = singleEmotion(EmotionEnum.HAPPINESS);
         cs[4].scale = js.getJSONObject("scores").getDouble("happiness");
-        cs[5].add(singleEmotion(EmotionEnum.NEUTRAL));
+        cs[5] = singleEmotion(EmotionEnum.NEUTRAL);
         cs[5].scale = js.getJSONObject("scores").getDouble("neutral");
-        cs[6].add(singleEmotion(EmotionEnum.SADNESS));
+        cs[6] = singleEmotion(EmotionEnum.SADNESS);
         cs[6].scale = js.getJSONObject("scores").getDouble("sadness");
-        cs[7].add(singleEmotion(EmotionEnum.SURPRISE));
+        cs[7] = singleEmotion(EmotionEnum.SURPRISE);
         cs[7].scale = js.getJSONObject("scores").getDouble("surprise");
 
         return Colour.scaleAdd(cs);
