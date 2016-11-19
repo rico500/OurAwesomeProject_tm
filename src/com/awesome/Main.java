@@ -12,8 +12,7 @@ import com.awesome.hardware.WebcamSupport;
 
 public class Main {
 
-    private static final boolean hardware_on = false;
-    private static final int delay = 150;
+    private static final long delay = 100;
 
     public static void main(String[] args) {
 	// write your code here
@@ -30,7 +29,7 @@ public class Main {
 
             while (true) {
                 Thread.sleep(delay);
-                    String s = Emotion.getEmotionJSON(WebcamSupport.getSnapshot());
+                    String s = Emotion.getEmotion(WebcamSupport.getSnapshot());
                     s = s.substring(1, s.length() - 1);
                     System.out.println(s);
 
@@ -63,6 +62,30 @@ public class Main {
                 Keyboard.shutdown();
             }
             System.out.print(e.getMessage());
+        }
+        */
+        runThroughEmotions();
+
+        Keyboard.shutdown();
+        Mouse.shutdown();
+        Headset.shutdown();
+
+    }
+
+    private static void setPeripheralsColor(Colour c) {
+        Keyboard.setColourSmoothly(c, delay);
+        Mouse.setColourSmoothly(c, delay);
+        Headset.setColourSmoothly(c, delay);
+    }
+
+    private static void runThroughEmotions(){
+        for (EmotionEnum e : EmotionEnum.values()){
+            setPeripheralsColor(Colours.singleEmotion(e));
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
             }
+        }
     }
 }
