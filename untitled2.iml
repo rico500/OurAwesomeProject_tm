@@ -48,7 +48,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/commons-codec-1.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/commons-cli-1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -57,7 +57,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/commons-logging-1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/commons-codec-1.9.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -66,7 +66,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/fluent-hc-4.5.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/commons-logging-1.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -75,7 +75,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/httpclient-4.5.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/fluent-hc-4.5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -84,7 +84,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/httpclient-cache-4.5.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpclient-4.5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -93,7 +93,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/httpclient-win-4.5.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpclient-cache-4.5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -102,7 +102,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/httpcore-4.4.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpclient-win-4.5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -111,7 +111,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/httpmime-4.5.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpcore-4.4.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -120,7 +120,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/jna-4.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpcore-4.4.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -129,7 +129,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/httpcomponents-client-4.5.2 3/lib/jna-platform-4.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpcore-ab-4.4.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -138,7 +138,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/commons-cli-1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpcore-nio-4.4.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -147,7 +147,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/httpcore-nio-4.4.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/httpmime-4.5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -156,7 +156,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/httpcore-ab-4.4.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/jna-4.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -165,7 +165,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/httpcore-4.4.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/http-requests/jna-platform-4.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -174,7 +174,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/json-20160810.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/json-20160810.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

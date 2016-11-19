@@ -50,7 +50,7 @@ public class Emotion {
             URI uri = builder.build();
             HttpPost request = new HttpPost(uri);
             request.setHeader("Content-Type", "application/octet-stream");
-            request.setHeader("Ocp-Apim-Subscription-Key", "b2e7ad2e399f4afb9be3096d50a98a93");
+            request.setHeader("Ocp-Apim-Subscription-Key", "d9b29a6ab43649d0af4d99c0ba59e8e3");
 
 
             // Request body
