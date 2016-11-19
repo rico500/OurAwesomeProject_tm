@@ -44,8 +44,8 @@ public class Main {
 
         }
         catch(InterruptedException e){
-                System.out.print(e.getMessage());
+            Keyboard.shutdown();
+            System.out.print(e.getMessage());
             }
     }
-        //Keyboard.shutdownKeyboard();
 }
