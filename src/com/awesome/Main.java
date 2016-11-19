@@ -32,11 +32,13 @@ public class Main {
                             Colour c = Colours.generateColour(s);
                             System.out.println(c.toString());
 
+                            Keyboard.setColor(c);
                         }catch(JSONException e){
                             System.err.println("Parsing error! JSON : " + s);
                         }
 
                     }
+
 
                     //Keyboard.setColor(0, 255, 0);
             }

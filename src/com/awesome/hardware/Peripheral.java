@@ -1,5 +1,6 @@
 package com.awesome.hardware;
 
+import com.awesome.cognitive.Colour;
 import com.logitech.gaming.LogiLED;
 
 /**
@@ -23,5 +24,9 @@ public abstract class Peripheral {
 
     public static void setColor(int r, int g, int b) {
         LogiLED.LogiLedSetLighting((r/255)*100, (g/255)*100,(b/255)*100);
+    }
+
+    public static void setColor(Colour c){
+        setColor(c.r, c.g, c.b);
     }
 }
