@@ -6,7 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        Keyboard myKeyboard = new Keyboard();
-        myKeyboard.setColor(100,0,0);
+        Keyboard.initKeyboard();
+        Keyboard.setColor(0, 255, 0);
+        //Keyboard.shutdownKeyboard();
     }
 }
