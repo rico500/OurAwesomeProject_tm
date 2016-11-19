@@ -9,7 +9,11 @@ public class Main {
 	// write your code here
         WebcamSupport.showWebCamLiveFeed();
         Keyboard.initKeyboard();
-        Keyboard.setColor(0, 255, 0);
+
+        while(true){
+            WebcamSupport.getSnapshot();
+            Keyboard.setColor(0, 255, 0);
+        }
         //Keyboard.shutdownKeyboard();
     }
 }
