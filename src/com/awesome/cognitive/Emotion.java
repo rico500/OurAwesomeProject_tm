@@ -1,21 +1,32 @@
 package com.awesome.cognitive;
 
 import java.net.URI;
+import java.nio.file.*;
+import java.io.File;
+
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
+import java.awt.image.DataBufferByte;
+import javax.imageio.ImageIO;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.ContentType;
+
 
 /**
  * Created by ebrunner on 19/11/16.
  */
 public class Emotion {
 
-    public static void getEmotion(){
+    public static void getEmotion(byte[] imageByteArray){
 
         HttpClient httpclient = HttpClients.createDefault();
 
@@ -33,12 +44,22 @@ public class Emotion {
             // Request body
 
             // String Entity test
-            StringEntity reqEntity = new StringEntity("{ \"url\": \"http://pngimg.com/upload/face_PNG11761.png\" }");
+            // StringEntity reqEntity = new StringEntity("{ \"url\": \"http://pngimg.com/upload/face_PNG11761.png\" }");
 
             // File Entity test
-            File file = new File("");
-            FileEntity entity = new FileEntity(file,
-                    ContentType.create("text/plain", "UTF-8"));
+            // Path imagefile = Paths.get(System.getProperty("user.dir"));
+           /* Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
+            File imagefile = new File(imagepath.toString());
+
+            System.out.println("Found Image" + imagepath.toString());
+            BufferedImage bufferedImage = ImageIO.read(imagefile);
+
+            // get DataBufferBytes from Raster
+            WritableRaster raster = bufferedImage .getRaster();
+            DataBufferByte imageByteArray   = (DataBufferByte) raster.getDataBuffer();*/
+
+            ByteArrayEntity reqEntity = new ByteArrayEntity(imageByteArray,
+                    ContentType.create("application/octet-stream"));
 
             request.setEntity(reqEntity);
 
