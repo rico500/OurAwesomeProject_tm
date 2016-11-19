@@ -5,16 +5,20 @@ import com.awesome.cognitive.Colour;
 
 import java.lang.Thread;
 
+import com.awesome.hardware.Headset;
 import com.awesome.hardware.Keyboard;
+import com.awesome.hardware.Mouse;
 import com.awesome.hardware.WebcamSupport;
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-
+        WebcamSupport.init();
         WebcamSupport.showWebCamLiveFeed();
         Keyboard.init();
+        Mouse.init();
+        Headset.init();
 
         try {
 
@@ -33,6 +37,8 @@ public class Main {
                             System.out.println(c.toString());
 
                             Keyboard.setColor(c);
+                            Mouse.setColor(c);
+                            Headset.setColor(c);
                         }catch(org.json.JSONException e){
                             System.err.println("Parsing error! JSON : " + s);
                         }
