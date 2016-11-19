@@ -8,8 +8,7 @@ import com.logitech.gaming.LogiLED;
  */
 public abstract class Peripheral {
 
-    private static final int transitionMilliSecondsInterval = 1000;
-
+    private static Colour prevColour;
 
     public static void init() {
         LogiLED.LogiLedInit();
@@ -18,7 +17,8 @@ public abstract class Peripheral {
         } catch(Exception e){
         }
         LogiLED.LogiLedSaveCurrentLighting();
-        setColor(0,0,0);
+        prevColour = new Colour(0, 0, 0, 0);
+        setColor(prevColour);
     }
 
     public static void shutdown() {
@@ -26,7 +26,7 @@ public abstract class Peripheral {
     }
 
     public static void setColor(int r, int g, int b) {
-        LogiLED.LogiLedPulseLighting((r/255)*100, (g/255)*100,(b/255)*100, LogiLED.LOGI_LED_DURATION_INFINITE, transitionMilliSecondsInterval);
+        LogiLED.LogiLedPulseLighting((r/255)*100, (g/255)*100,(b/255)*100, 2000, 1000);
     }
 
     public static void setColor(Colour c){
