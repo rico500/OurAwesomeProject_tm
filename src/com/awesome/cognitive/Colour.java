@@ -27,10 +27,10 @@ public class Colour {
     }
 
     public void add(Colour c){
-        r = c.r;
-        g = c.g;
-        b = c.b;
-        a = (a + c.a) / 2;
+        r += c.r;
+        g += c.g;
+        b += c.b;
+        a += (a + c.a) / 2;
     }
 
     public static Colour scaleAdd(Colour[] cs){

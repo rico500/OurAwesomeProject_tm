@@ -14,7 +14,9 @@ public class Main {
 	// write your code here
 
         WebcamSupport.showWebCamLiveFeed();
-        //Keyboard.init();
+        Keyboard.init();
+        Mouse.init();
+        Headset.init();
 
         try {
 
@@ -32,7 +34,9 @@ public class Main {
                             Colour c = Colours.multiConvert(s);
                             System.out.println(c.toString());
 
-                            //Keyboard.setColor(c);
+                            Keyboard.setColor(c);
+                            Mouse.setColor(c);
+                            Headset.setColor(c);
                         }catch(org.json.JSONException e){
                             System.err.println("Parsing error! JSON : " + s);
                         }
@@ -45,7 +49,7 @@ public class Main {
 
         }
         catch(InterruptedException e){
-           // Keyboard.shutdown();
+            Keyboard.shutdown();
             System.out.print(e.getMessage());
             }
     }
