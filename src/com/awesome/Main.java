@@ -1,4 +1,5 @@
 package com.awesome;
+import com.awesome.cognitive.Emotion;
 
 import com.awesome.hardware.Keyboard;
 import com.awesome.hardware.WebcamSupport;

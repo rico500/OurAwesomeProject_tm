@@ -24,6 +24,9 @@
 ## File-based project format:
 *.iws
 
+## intelliJ
+/out/
+
 ## Plugin-specific files:
 
 # mpeltonen/sbt-idea plugin
@@ -37,3 +40,5 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+.DS_Store

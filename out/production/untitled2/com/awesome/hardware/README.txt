@@ -1,1 +1,0 @@
-Hardware package. All hardware communications are done here
