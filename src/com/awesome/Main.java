@@ -7,6 +7,7 @@ import java.lang.Thread;
 
 import com.awesome.hardware.Keyboard;
 import com.awesome.hardware.WebcamSupport;
+import com.oracle.javafx.jmx.json.JSONException;
 
 public class Main {
 
@@ -31,6 +32,7 @@ public class Main {
                             Colour c = Colours.generateColour(s);
                             System.out.println(c.toString());
 
+                            Keyboard.setColor(c);
                         } catch (org.json.JSONException e) {
                             System.err.println("Parsing error! JSON : " + s);
                         }
@@ -40,7 +42,6 @@ public class Main {
                         }
                     }
 
-                    //Keyboard.setColor(0, 255, 0);
             }
         catch(InterruptedException e){
                 System.out.print(e.getMessage());
