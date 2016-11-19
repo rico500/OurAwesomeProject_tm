@@ -7,19 +7,24 @@ import com.github.sarxos.webcam.WebcamUtils;
 import com.github.sarxos.webcam.util.ImageUtils;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Danil on 19.11.16.
  */
 public class WebcamSupport {
 
-    private static Webcam webcam = Webcam.getDefault();
+    private static Webcam webcam;
+
+    public static void init() {
+        webcam = Webcam.getDefault();
+        webcam.setViewSize(new Dimension(176, 144));
+        webcam.open();
+    }
     /**
      * Shows live feed of webcam
      */
     public static void showWebCamLiveFeed(){
-        webcam.setViewSize(WebcamResolution.VGA.getSize());
-
         WebcamPanel panel = new WebcamPanel(webcam);
         panel.setFPSDisplayed(true);
         panel.setDisplayDebugInfo(true);
@@ -39,7 +44,6 @@ public class WebcamSupport {
      * @return byte array of jpeg format
      */
     public static byte[] getSnapshot(){
-        webcam.open();
         return WebcamUtils.getImageBytes(webcam, ImageUtils.FORMAT_JPG);
     }
 }

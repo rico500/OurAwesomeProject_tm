@@ -12,14 +12,16 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-
-        WebcamSupport.showWebCamLiveFeed();
-        Keyboard.init();
+        WebcamSupport.init();
+    //    WebcamSupport.showWebCamLiveFeed();
+//        Keyboard.init();
+//        Mouse.init();
+//        Headset.init();
 
         try {
 
             while (true) {
-                    Thread.sleep(2000);
+                    Thread.sleep(100);
                     String s = Emotion.getEmotion(WebcamSupport.getSnapshot());
                     s = s.substring(1, s.length() - 1);
                     System.out.println(s);
@@ -32,7 +34,9 @@ public class Main {
                             Colour c = Colours.multiConvert(s);
                             System.out.println(c.toString());
 
-                            Keyboard.setColor(c);
+                            //Keyboard.setColor(c);
+                            //Mouse.setColor(c);
+                            //Headset.setColor(c);
                         }catch(org.json.JSONException e){
                             System.err.println("Parsing error! JSON : " + s);
                         }
@@ -45,7 +49,7 @@ public class Main {
 
         }
         catch(InterruptedException e){
-            Keyboard.shutdown();
+            //Keyboard.shutdown();
             System.out.print(e.getMessage());
             }
     }
