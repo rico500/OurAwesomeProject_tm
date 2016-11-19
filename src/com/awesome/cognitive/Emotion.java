@@ -26,7 +26,18 @@ import org.apache.http.entity.ContentType;
  */
 public class Emotion {
 
-    public static void getEmotion(byte[] imageByteArray){
+    /**
+     * getEmotion
+     *
+     * Get intent in image stored in byte arrray.
+     * See https://dev.projectoxford.ai/docs/services/5639d931ca73072154c1ce89/operations/563b31ea778daf121cc3a5fa
+     *
+     * @param byte[] imageByteArray image as an array of bytes (can't exceed 4Mb or )
+     *
+     * @return String image intent json as a string
+     */
+
+    public static String getEmotion(byte[] imageByteArray){
 
         HttpClient httpclient = HttpClients.createDefault();
 
@@ -37,28 +48,64 @@ public class Emotion {
 
             URI uri = builder.build();
             HttpPost request = new HttpPost(uri);
-            request.setHeader("Content-Type", "application/json");
+            request.setHeader("Content-Type", "application/octet-stream");
             request.setHeader("Ocp-Apim-Subscription-Key", "b2e7ad2e399f4afb9be3096d50a98a93");
 
 
             // Request body
 
-            // String Entity test
-            // StringEntity reqEntity = new StringEntity("{ \"url\": \"http://pngimg.com/upload/face_PNG11761.png\" }");
+            ByteArrayEntity reqEntity = new ByteArrayEntity(imageByteArray,
+                    ContentType.create("application/octet-stream"));
+
+            request.setEntity(reqEntity);
+
+            HttpResponse response = httpclient.execute(request);
+            HttpEntity entity = response.getEntity();
+
+            if (entity != null)
+            {
+                String jsonOutput = EntityUtils.toString(entity);
+                //System.out.println(jsonOutput);
+                return jsonOutput;
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
+    /**
+     * getEmotion
+     *
+     * test function that uses test.jpg to see if the service is working and byte conversion is ok.
+     */
+    public static void getEmotion(){
+
+        HttpClient httpclient = HttpClients.createDefault();
+
+        try
+        {
+            URIBuilder builder = new URIBuilder("https://api.projectoxford.ai/emotion/v1.0/recognize");
+
+
+            URI uri = builder.build();
+            HttpPost request = new HttpPost(uri);
+            request.setHeader("Content-Type", "application/octet-stream");
+            request.setHeader("Ocp-Apim-Subscription-Key", "b2e7ad2e399f4afb9be3096d50a98a93");
+
+
+            // Request body
 
             // File Entity test
-            // Path imagefile = Paths.get(System.getProperty("user.dir"));
-           /* Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
+            Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
             File imagefile = new File(imagepath.toString());
 
-            System.out.println("Found Image" + imagepath.toString());
-            BufferedImage bufferedImage = ImageIO.read(imagefile);
+            System.out.println("Found Image at: " + imagepath.toString());
 
-            // get DataBufferBytes from Raster
-            WritableRaster raster = bufferedImage .getRaster();
-            DataBufferByte imageByteArray   = (DataBufferByte) raster.getDataBuffer();*/
-
-            ByteArrayEntity reqEntity = new ByteArrayEntity(imageByteArray,
+            System.out.println(Files.readAllBytes(imagefile.toPath()));
+            ByteArrayEntity reqEntity = new ByteArrayEntity(Files.readAllBytes(imagefile.toPath()),
                     ContentType.create("application/octet-stream"));
 
             request.setEntity(reqEntity);
