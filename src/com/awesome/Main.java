@@ -12,21 +12,25 @@ import com.awesome.hardware.WebcamSupport;
 
 public class Main {
 
-    private static final long delay = 100;
+    private static final boolean hardware_on = false;
+    private static final int delay = 150;
 
     public static void main(String[] args) {
 	// write your code here
         WebcamSupport.init();
         WebcamSupport.showWebCamLiveFeed();
-        Keyboard.init();
-        Mouse.init();
-        Headset.init();
+
+        if(hardware_on) {
+            Keyboard.init();
+            Mouse.init();
+            Headset.init();
+        }
 
         try {
 
             while (true) {
                 Thread.sleep(delay);
-                    String s = Emotion.getEmotion(WebcamSupport.getSnapshot());
+                    String s = Emotion.getEmotionJSON(WebcamSupport.getSnapshot());
                     s = s.substring(1, s.length() - 1);
                     System.out.println(s);
 
@@ -38,9 +42,11 @@ public class Main {
                             Colour c = Colours.multiConvert(s);
                             System.out.println(c.toString());
 
-                            Keyboard.setColor(c);
-                            Mouse.setColor(c);
-                            Headset.setColourSmoothly(c, delay);
+                            if(hardware_on) {
+                                Keyboard.setColor(c);
+                                Mouse.setColor(c);
+                                Headset.setColourSmoothly(c, delay);
+                            }
                         }catch(org.json.JSONException e){
                             System.err.println("Parsing error! JSON : " + s);
                         }
@@ -53,7 +59,9 @@ public class Main {
 
         }
         catch(InterruptedException e){
-            Keyboard.shutdown();
+            if(hardware_on) {
+                Keyboard.shutdown();
+            }
             System.out.print(e.getMessage());
             }
     }

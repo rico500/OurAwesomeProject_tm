@@ -38,7 +38,7 @@ public class Emotion {
      * @return String image intent json as a string
      */
 
-    public static String getEmotion(byte[] imageByteArray){
+    public static String getEmotionJSON(byte[] imageByteArray){
 
         HttpClient httpclient = HttpClients.createDefault();
 
@@ -82,7 +82,7 @@ public class Emotion {
      *
      * test function that uses test.jpg to see if the service is working and byte conversion is ok.
      */
-    public static void getEmotion(){
+    public static void getEmotionJSON(){
         Path imagepath = Paths.get(System.getProperty("user.dir").concat("/test.jpg"));
         File imagefile = new File(imagepath.toString());
 
@@ -90,7 +90,7 @@ public class Emotion {
 
         try {
             System.out.println(Files.readAllBytes(imagefile.toPath()));
-            getEmotion(Files.readAllBytes(imagefile.toPath()));
+            getEmotionJSON(Files.readAllBytes(imagefile.toPath()));
         }catch (IOException e) {
             System.err.println(e.getMessage());
         }
