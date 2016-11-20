@@ -22,6 +22,7 @@ public class Colours {
 
     public static void setEmotionQueueLength(int value){
         emotionQueueLength = value;
+        System.out.println(value);
     }
 
     public static int getEmotionQueueLength(){
