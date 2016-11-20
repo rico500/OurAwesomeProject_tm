@@ -13,11 +13,28 @@ public class Colours {
 
 
 
-    private static final int emotionQueueLength = 10;
+    private static int emotionQueueLength = 10;
+    private static boolean detectSuddenEmotions = true;
     private static int[] emotionCounter = {0, 0, 0, 0, 0, 0, 0, 0};
     private static ArrayDeque<EmotionEnum> emotionQueue = new ArrayDeque<>();
     private static int emotionQueueCounter = 0;
     private static EmotionEnum prevEmotion;
+
+    public static void setEmotionQueueLength(int value){
+        emotionQueueLength = value;
+    }
+
+    public static int getEmotionQueueLength(){
+        return emotionQueueLength;
+    }
+
+    public static void setDetectSuddenEmotions(boolean value){
+        detectSuddenEmotions = value;
+    }
+
+    public static boolean getDetectSuddenEmotions(){
+        return detectSuddenEmotions;
+    }
 
     /**
      *
@@ -110,12 +127,16 @@ public class Colours {
     }
 
     public static boolean isSuddenChange(){
-        if(emotionQueue.peekLast() != prevEmotion){
-            System.out.println("Sudden Change in Emotion detected!");
-            prevEmotion = emotionQueue.peekLast();
-            return true;
-        }else
-            return false;
+        if(detectSuddenEmotions) {
+            if (emotionQueue.peekLast() != prevEmotion) {
+                System.out.println("Sudden Change in Emotion detected!");
+                prevEmotion = emotionQueue.peekLast();
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public static Colour getLastColor(){

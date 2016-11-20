@@ -16,10 +16,11 @@ public class WebcamSupport {
 
     private static Webcam webcam;
 
-    public static void init() {
+    public static Webcam init() {
         webcam = Webcam.getDefault();
         webcam.setViewSize(new Dimension(176, 144));
         webcam.open();
+        return webcam;
     }
     /**
      * Shows live feed of webcam
