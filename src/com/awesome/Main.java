@@ -16,24 +16,9 @@ import javax.swing.*;
 public class Main {
 
     private static final boolean hardware_on = true;
-    private static final long delay = 100;
+    private static final long delay = 2000;
 
     public static void main(String[] args) {
-	// write your code here
-        GUI gui = new GUI(WebcamSupport.init());
-
-        byte keyBoard[][] = new byte[5][14];
-        for (int i = 0; i < keyBoard.length; i++)
-            for (int j = 0; j < keyBoard[i].length; j++)
-                keyBoard[i][j] = 0;
-
-        WebcamSupport.init();
-        WebcamSupport.showWebCamLiveFeed();
-        JFrame f=new JFrame();
-        f.addKeyListener(new MyKeyListener());
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
-
 
         if(hardware_on) {
             Keyboard.init();
@@ -41,17 +26,34 @@ public class Main {
             Headset.init();
         }
 
-        testEmotionRecognition();
+        demoTypingTrails();
+        demoEmotions();
+    }
 
-        //runThroughEmotions();
-
-        //0Keyboard.setDrawing(KeyboardPresets.ARROW_RIGHT, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR));
-        //testBanner(KeyboardPresets.ARROW_RIGHT);
-
+    private static void shutdownHardware(){
         Keyboard.shutdown();
         Mouse.shutdown();
         Headset.shutdown();
+    }
 
+    private static void demoEmotions(){
+        //GUI gui = new GUI(WebcamSupport.init());
+        WebcamSupport.init();
+        WebcamSupport.showWebCamLiveFeed();
+
+        testEmotionRecognition();
+
+        //runThroughEmotions(); //Loop through the different emotions
+
+        //Keyboard.setDrawing(KeyboardPresets.ARROW_RIGHT, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR));
+        //testBanner(KeyboardPresets.ARROW_RIGHT);
+    }
+
+    private static void demoTypingTrails(){
+        JFrame f=new JFrame();
+        f.addKeyListener(new MyKeyListener());
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
     }
 
     private static void testBanner(byte[][] drawing) {
