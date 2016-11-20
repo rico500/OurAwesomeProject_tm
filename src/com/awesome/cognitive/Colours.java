@@ -203,7 +203,7 @@ public class Colours {
                 c = new Colour(0, 210, 72);
                 break;
             case NEUTRAL:
-                c = new Colour(0, 0, 0);
+                c = new Colour(255, 255, 255);
                 break;
             case SADNESS:
                 c = new Colour(0, 69, 147);

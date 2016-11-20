@@ -22,10 +22,18 @@ public class Main {
 	// write your code here
         GUI gui = new GUI(WebcamSupport.init());
 
+        byte keyBoard[][] = new byte[5][14];
+        for (int i = 0; i < keyBoard.length; i++)
+            for (int j = 0; j < keyBoard[i].length; j++)
+                keyBoard[i][j] = 0;
+
+        WebcamSupport.init();
+        WebcamSupport.showWebCamLiveFeed();
         JFrame f=new JFrame();
         f.addKeyListener(new MyKeyListener());
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+
 
         if(hardware_on) {
             Keyboard.init();
@@ -40,9 +48,9 @@ public class Main {
         //0Keyboard.setDrawing(KeyboardPresets.ARROW_RIGHT, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR));
         //testBanner(KeyboardPresets.ARROW_RIGHT);
 
-        //Keyboard.shutdown();
-        //Mouse.shutdown();
-        //eHeadset.shutdown();
+        Keyboard.shutdown();
+        Mouse.shutdown();
+        Headset.shutdown();
 
     }
 
@@ -54,7 +62,7 @@ public class Main {
         try {
 
             while (true) {
-                Thread.sleep(delay);
+                Thread.sleep(0);
                     String s = Emotion.getEmotionJSON(WebcamSupport.getSnapshot());
                     s = s.substring(1, s.length() - 1);
                     System.out.println(s);
@@ -105,7 +113,7 @@ public class Main {
         for (EmotionEnum e : EmotionEnum.values()){
             setPeripheralsColor(Colours.singleEmotion(e));
             try {
-                Thread.sleep(2000);
+                Thread.sleep(0);
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }

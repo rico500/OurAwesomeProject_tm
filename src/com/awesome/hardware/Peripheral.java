@@ -47,12 +47,12 @@ public abstract class Peripheral {
         long slG = (long) ((Math.abs(dG) / (Math.abs(dR)+Math.abs(dG)+Math.abs(dB)))*dMillis);
         long slB = (long) ((Math.abs(dB) / (Math.abs(dR)+Math.abs(dG)+Math.abs(dB)))*dMillis);
 
-
+/*
         System.out.println(prevColour.r + " " + c.r + " " + dR);
         System.out.println(prevColour.g + " " + c.g + " " + dG);
         System.out.println(prevColour.b + " " + c.b + " " + dB);
         System.out.println(prevColour.a + " " + c.a + " " + dA);
-
+*/
         if (dR > 0.0){ // We want to go up
             while(prevColour.r < c.r) {
                 prevColour.r += dR;
@@ -133,7 +133,6 @@ public abstract class Peripheral {
     }
 
     public static void setColor(Colour c){
-        prevColour = new Colour(c);
-        setColor(c.r, c.g, c.b);
+        setColor(c.r, c.g, c.b, c.a);
     }
 }
