@@ -80,6 +80,11 @@ public class GUI {
             JSlider source = (JSlider)e.getSource();
             if (!source.getValueIsAdjusting()) {
                 Colours.setEmotionQueueLength(source.getValue());
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
 
