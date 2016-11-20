@@ -3,6 +3,7 @@ import com.awesome.cognitive.Colours;
 import com.awesome.cognitive.Emotion;
 import com.awesome.cognitive.EmotionEnum;
 import com.awesome.cognitive.Colour;
+import com.awesome.gui.GUI;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,11 +15,13 @@ import javax.swing.*;
 
 public class Main {
 
-    private static final boolean hardware_on = true;
-    private static final long delay = 20;
+    private static final boolean hardware_on = false;
+    private static final long delay = 100;
 
     public static void main(String[] args) {
 	// write your code here
+        GUI gui = new GUI(WebcamSupport.init());
+
         byte keyBoard[][] = new byte[5][14];
         for (int i = 0; i < keyBoard.length; i++)
             for (int j = 0; j < keyBoard[i].length; j++)
