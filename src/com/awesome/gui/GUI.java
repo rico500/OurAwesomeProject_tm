@@ -20,7 +20,6 @@ import com.github.sarxos.webcam.util.ImageUtils;
 public class GUI {
 
     private JFrame mainFrame;
-    private JPanel VerticalPanel;
     private JPanel SamplesPanel;
     private JPanel SuddenPanel;
     private WebcamPanel VideoPanel;
@@ -35,12 +34,7 @@ public class GUI {
     private void prepareGUI() {
         mainFrame = new JFrame("Demo Control Panel");
         mainFrame.setSize(600, 600);
-        mainFrame.setLayout(new FlowLayout());
-
-        VerticalPanel = new JPanel();
-        VerticalPanel.setLayout(new BoxLayout(VerticalPanel, BoxLayout.PAGE_AXIS));
-
-        mainFrame.add(VerticalPanel);
+        mainFrame.setLayout(new GridLayout(3 , 1));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         SamplesPanel = new JPanel();
@@ -52,10 +46,11 @@ public class GUI {
         VideoPanel.setMirrored(true);
         SuddenPanel = new JPanel();
         SuddenPanel.setLayout(new FlowLayout());
+        SuddenPanel.setPreferredSize(new Dimension(50, 600));
 
-        VerticalPanel.add(SamplesPanel);
-        VerticalPanel.add(SuddenPanel);
-        VerticalPanel.add(VideoPanel);
+        mainFrame.add(SamplesPanel);
+        mainFrame.add(SuddenPanel);
+        mainFrame.add(VideoPanel);
 
         JLabel historySamplesSliderLabel = new JLabel("Number of history samples");
         SamplesPanel.add(historySamplesSliderLabel);

@@ -223,6 +223,11 @@ public class Colours {
             emotionQueue.add(latestEmotion);
             emotionCounter[latestEmotion.ordinal()]++;
             emotionQueueCounter++;
+        }else if(emotionQueueCounter > emotionQueueLength){
+            for(int i = 0; i<(emotionQueueCounter-emotionQueueLength); i++){
+                emotionQueue.remove();
+                emotionQueueCounter--;
+            }
         }else{
             emotionCounter[emotionQueue.remove().ordinal()]--;
             emotionQueue.add(latestEmotion);
