@@ -13,7 +13,7 @@ public class Colours {
 
 
 
-    private static int emotionQueueLength = 10;
+    private static int emotionQueueLength = 4;
     private static boolean detectSuddenEmotions = true;
     private static int[] emotionCounter = {0, 0, 0, 0, 0, 0, 0, 0};
     private static ArrayDeque<EmotionEnum> emotionQueue = new ArrayDeque<>();
@@ -22,6 +22,7 @@ public class Colours {
 
     public static void setEmotionQueueLength(int value){
         emotionQueueLength = value;
+        System.out.println(value);
     }
 
     public static int getEmotionQueueLength(){

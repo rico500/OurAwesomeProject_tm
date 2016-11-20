@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
 import java.io.File;
+import java.util.concurrent.Future;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
@@ -38,8 +39,8 @@ public class Emotion {
      * @return String image intent json as a string
      */
 
-    public static String getEmotionJSON(byte[] imageByteArray){
 
+    public static String getEmotionJSON(byte[] imageByteArray){
         HttpClient httpclient = HttpClients.createDefault();
 
         try
