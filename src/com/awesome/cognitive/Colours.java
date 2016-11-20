@@ -52,24 +52,30 @@ public class Colours {
      */
     public static EmotionEnum singleConvert(String jsonString){
         JSONObject js = new JSONObject(jsonString);
-        double a, c, d, f, h, n, sa, su;
+        double a, c;
         a = js.getJSONObject("scores").getDouble("anger");
         EmotionEnum e = EmotionEnum.ANGER;
         double t = a;
         c = js.getJSONObject("scores").getDouble("contempt");
         e = (a < c)? EmotionEnum.CONTEMPT : e;
-        d = js.getJSONObject("scores").getDouble("disgust");
-        e = (c < d)? EmotionEnum.DISGUST : e;
-        f = js.getJSONObject("scores").getDouble("fear");
-        e = (d < f)? EmotionEnum.FEAR : e;
-        h = js.getJSONObject("scores").getDouble("happiness");
-        e = (f < h)? EmotionEnum.HAPPINESS : e;
-        n = js.getJSONObject("scores").getDouble("neutral");
-        e = (h < n)? EmotionEnum.NEUTRAL : e;
-        sa = js.getJSONObject("scores").getDouble("sadness");
-        e = (n < sa)? EmotionEnum.SADNESS : e;
-        su = js.getJSONObject("scores").getDouble("surprise");
-        e = (sa < su)? EmotionEnum.SURPRISE : e;
+        a = (a < c)? c : a;
+        c = js.getJSONObject("scores").getDouble("disgust");
+        e = (a < c)? EmotionEnum.DISGUST : e;
+        a = (a < c)? c : a;
+        c = js.getJSONObject("scores").getDouble("fear");
+        e = (a < c)? EmotionEnum.FEAR : e;
+        a = (a < c)? c : a;
+        c = js.getJSONObject("scores").getDouble("happiness");
+        e = (a < c)? EmotionEnum.HAPPINESS : e;
+        a = (a < c)? c : a;
+        c = js.getJSONObject("scores").getDouble("neutral");
+        e = (a < c)? EmotionEnum.NEUTRAL : e;
+        a = (a < c)? c : a;
+        c = js.getJSONObject("scores").getDouble("sadness");
+        e = (a < c)? EmotionEnum.SADNESS : e;
+        a = (a < c)? c : a;
+        c = js.getJSONObject("scores").getDouble("surprise");
+        e = (a < c)? EmotionEnum.SURPRISE : e;
 
         return e;
     }
