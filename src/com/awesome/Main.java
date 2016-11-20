@@ -19,8 +19,8 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        //WebcamSupport.init();
-        //WebcamSupport.showWebCamLiveFeed();
+        WebcamSupport.init();
+        WebcamSupport.showWebCamLiveFeed();
         JFrame f=new JFrame();
         f.addKeyListener(new MyKeyListener());
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,12 +32,12 @@ public class Main {
             Headset.init();
         }
 
-        //testEmotionRecognition();
+        testEmotionRecognition();
 
         //runThroughEmotions();
 
         //0Keyboard.setDrawing(KeyboardPresets.ARROW_RIGHT, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR));
-        testBanner(KeyboardPresets.ARROW_RIGHT);
+        //testBanner(KeyboardPresets.ARROW_RIGHT);
 
         //Keyboard.shutdown();
         //Mouse.shutdown();
@@ -63,7 +63,7 @@ public class Main {
                         try {
 
                             //Colour c = Colours.generateColour(s);
-                            Colour c = Colours.multiConvert(s);
+                            Colour c = Colours.historyDominantColour(s);
                             System.out.println(c.toString());
 
                             if(hardware_on) {
