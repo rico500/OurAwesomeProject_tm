@@ -14,7 +14,7 @@ import javax.swing.*;
 
 public class Main {
 
-    private static final boolean hardware_on = false;
+    private static final boolean hardware_on = true;
     private static final long delay = 100;
 
     public static void main(String[] args) {
@@ -67,9 +67,13 @@ public class Main {
                             System.out.println(c.toString());
 
                             if(hardware_on) {
-                                Keyboard.setColor(c);
-                                Mouse.setColor(c);
-                                Headset.setColourSmoothly(c, delay);
+                                if(Colours.isSuddenChange()){
+                                    Keyboard.setColor(Colours.getLastColor());
+                                }else {
+                                    Keyboard.setColor(c);
+                                    Mouse.setColor(c);
+                                    Headset.setColourSmoothly(c, delay);
+                                }
                             }
                         }catch(org.json.JSONException e){
                             System.err.println("Parsing error! JSON : " + s);

@@ -15,9 +15,9 @@ public class Colours {
 
     private static final int emotionQueueLength = 10;
     private static int[] emotionCounter = {0, 0, 0, 0, 0, 0, 0, 0};
-    //private static FIFO<EmotionEnum> emotionArray = new FIFO(EmotionEnum, emotionArrayLength);
-    private static Queue<EmotionEnum> emotionQueue = new ArrayDeque<>();
+    private static ArrayDeque<EmotionEnum> emotionQueue = new ArrayDeque<>();
     private static int emotionQueueCounter = 0;
+    private static EmotionEnum prevEmotion;
 
     /**
      *
@@ -98,7 +98,6 @@ public class Colours {
     public static Colour historyMeanColour(String jsonString){
         // Declare variables
         EmotionEnum latestEmotion = singleConvert(jsonString);
-        int dominantEmotionIndex = 0;
         updateEmotionCounter(latestEmotion);
 
         Colour meanColour = new Colour(0,0,0);
@@ -108,6 +107,19 @@ public class Colours {
         meanColour.divide(emotionQueueLength);
 
         return meanColour;
+    }
+
+    public static boolean isSuddenChange(){
+        if(emotionQueue.peekLast() != prevEmotion){
+            System.out.println("Sudden Change in Emotion detected!");
+            prevEmotion = emotionQueue.peekLast();
+            return true;
+        }else
+            return false;
+    }
+
+    public static Colour getLastColor(){
+        return singleEmotion(emotionQueue.peekLast());
     }
 
     /**
