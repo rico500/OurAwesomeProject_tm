@@ -63,15 +63,7 @@ public class Colours {
         // Declare variables
         EmotionEnum latestEmotion = singleConvert(jsonString);
         int dominantEmotionIndex = 0;
-        if(emotionQueueCounter < emotionQueueLength-1) {
-            emotionQueue.add(latestEmotion);
-            emotionCounter[latestEmotion.ordinal()]++;
-            emotionQueueCounter++;
-        }else{
-            emotionCounter[emotionQueue.remove().ordinal()]--;
-            emotionQueue.add(latestEmotion);
-            emotionCounter[latestEmotion.ordinal()]++;
-        }
+        updateEmotionCounter(latestEmotion);
 
         for(int i=0; i < emotionCounter.length; i++){
             if(emotionCounter[i] > emotionCounter[dominantEmotionIndex]){
@@ -87,6 +79,21 @@ public class Colours {
 
         return singleEmotion(EmotionEnum.values()[dominantEmotionIndex]);
 
+    }
+
+    public static Colour historyMeanColour(String jsonString){
+        // Declare variables
+        EmotionEnum latestEmotion = singleConvert(jsonString);
+        int dominantEmotionIndex = 0;
+        updateEmotionCounter(latestEmotion);
+
+        Colour meanColour = new Colour(0,0,0);
+        for(EmotionEnum e : emotionQueue) {
+            meanColour.add(singleEmotion(e));
+        }
+        meanColour.divide(emotionQueueLength - 1);
+
+        return meanColour;
     }
 
     /**
@@ -164,4 +171,17 @@ public class Colours {
         return c;
     }
 
+    private static void updateEmotionCounter(EmotionEnum latestEmotion){
+        if(emotionQueueCounter < emotionQueueLength-1) {
+            emotionQueue.add(latestEmotion);
+            emotionCounter[latestEmotion.ordinal()]++;
+            emotionQueueCounter++;
+        }else{
+            emotionCounter[emotionQueue.remove().ordinal()]--;
+            emotionQueue.add(latestEmotion);
+            emotionCounter[latestEmotion.ordinal()]++;
+        }
+    }
+
 }
+

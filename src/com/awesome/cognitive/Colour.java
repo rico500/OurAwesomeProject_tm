@@ -40,6 +40,13 @@ public class Colour {
         a += (a + c.a) / 2;
     }
 
+    public void divide(int denum){
+        r = r/denum;
+        g = g/denum;
+        b = b/denum;
+        a = a/denum;
+    }
+
     public static Colour scaleAdd(Colour[] cs){
         double r = 0, g = 0, b = 0, a = 0;
 

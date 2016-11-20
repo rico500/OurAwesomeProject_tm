@@ -63,7 +63,7 @@ public class Main {
                         try {
 
                             //Colour c = Colours.generateColour(s);
-                            Colour c = Colours.historyDominantColour(s);
+                            Colour c = Colours.historyMeanColour(s);
                             System.out.println(c.toString());
 
                             if(hardware_on) {
