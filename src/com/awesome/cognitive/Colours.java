@@ -58,6 +58,13 @@ public class Colours {
         return Colour.scaleAdd(cs);
     }
 
+    /**
+     * @param jsonString restful api response from cognitive services in String format
+     * @return a Colour Object
+     *
+     * determine colour based on historically most dominant colour
+     */
+
     public static Colour historyDominantColour(String jsonString){
 
         // Declare variables
@@ -81,6 +88,13 @@ public class Colours {
 
     }
 
+
+    /**
+     * @param jsonString restful api response from cognitive services in String format
+     * @return a Colour Object
+     *
+     * determine colour based on content of history
+     */
     public static Colour historyMeanColour(String jsonString){
         // Declare variables
         EmotionEnum latestEmotion = singleConvert(jsonString);
