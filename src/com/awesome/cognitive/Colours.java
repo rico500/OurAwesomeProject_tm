@@ -91,7 +91,7 @@ public class Colours {
         for(EmotionEnum e : emotionQueue) {
             meanColour.add(singleEmotion(e));
         }
-        meanColour.divide(emotionQueueLength - 1);
+        meanColour.divide(emotionQueueLength);
 
         return meanColour;
     }

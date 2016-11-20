@@ -37,7 +37,7 @@ public class Colour {
         r += c.r;
         g += c.g;
         b += c.b;
-        a += (a + c.a) / 2;
+        a += c.a;
     }
 
     public void divide(int denum){
