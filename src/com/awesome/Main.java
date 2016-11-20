@@ -15,8 +15,8 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        WebcamSupport.init();
-        WebcamSupport.showWebCamLiveFeed();
+        //WebcamSupport.init();
+        //WebcamSupport.showWebCamLiveFeed();
 
         if(hardware_on) {
             Keyboard.init();

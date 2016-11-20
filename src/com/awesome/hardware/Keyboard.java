@@ -1,5 +1,7 @@
 package com.awesome.hardware;
 import com.awesome.cognitive.Colour;
+import com.awesome.cognitive.Colours;
+import com.awesome.cognitive.EmotionEnum;
 import com.logitech.gaming.LogiLED;
 
 
@@ -21,9 +23,6 @@ public class Keyboard extends Peripheral{
     }
 
     public static void setDrawing(byte[][] drawing, Colour c0, Colour c1){
-        if (drawing.length != COLS && drawing[0].length != ROWS){
-            throw new IllegalArgumentException("Wrong drawing dimensions !!!");
-        }
         byte[] RGBAarray = new byte[NB_OF_BYTES_PER_KEY*COLS*ROWS];
         int i = 0;
         for (int row = 0; row<drawing.length; row++){
@@ -45,14 +44,23 @@ public class Keyboard extends Peripheral{
 
             }
         }
-
+        //printByteArray(drawing);
         LogiLED.LogiLedSetLightingFromBitmap(RGBAarray);
+    }
+
+    private static void printByteArray(byte[][] drawing) {
+        for (int i = 0; i< drawing.length; ++i){
+            for (int j = 0; j<drawing[i].length; ++j){
+                System.out.print(drawing[i][j]);
+            }
+            System.out.println();
+        }
     }
 
     private static byte[][] offsetDrawingHorizontaly(byte[][] drawing, int offset){
         byte[][] array = new byte[drawing.length][drawing[0].length];
         for (int r = 0; r<drawing.length; ++r){
-            for(int c = 0; c<drawing[c].length; ++c){
+            for(int c = 0; c<CENTER_KEYS; ++c){
                 array[r][(c+offset) % CENTER_KEYS] = drawing[r][c];
             }
         }
