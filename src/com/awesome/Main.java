@@ -16,7 +16,8 @@ import javax.swing.*;
 public class Main {
 
     private static final boolean hardware_on = true;
-    private static final long delay = 2000;
+    private static final long delay = 100;
+    private static boolean smooth = true;
 
     public static void main(String[] args) {
 
@@ -27,7 +28,7 @@ public class Main {
         }
 
         demoTypingTrails();
-        demoEmotions();
+        //hdemoEmotions();
     }
 
     private static void shutdownHardware(){
@@ -50,6 +51,7 @@ public class Main {
     }
 
     private static void demoTypingTrails(){
+        smooth = false;
         JFrame f=new JFrame();
         f.addKeyListener(new MyKeyListener());
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,11 +81,9 @@ public class Main {
 
                             if(hardware_on) {
                                 if(Colours.isSuddenChange()){
-                                    Keyboard.setColor(Colours.getLastColor());
+                                    setPeripheralsColor(Colours.getLastColor());
                                 }else {
-                                    Keyboard.setColor(c);
-                                    Mouse.setColor(c);
-                                    Headset.setColourSmoothly(c, delay);
+                                    setPeripheralsColor(c);
                                 }
                             }
                         }catch(org.json.JSONException e){
@@ -105,10 +105,14 @@ public class Main {
         }
     }
 
-    private static void setPeripheralsColor(Colour c) {
+    private static void setPeripheralsColor(Colour c) {if(smooth){
         Keyboard.setColourSmoothly(c, delay);
         Mouse.setColourSmoothly(c, delay);
         Headset.setColourSmoothly(c, delay);
+    } else {Keyboard.setColor(c);
+        Mouse.setColor(c);
+        Headset.setColor(c);
+    }
     }
 
     private static void runThroughEmotions(){
