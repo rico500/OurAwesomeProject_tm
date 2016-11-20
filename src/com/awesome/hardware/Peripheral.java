@@ -25,8 +25,10 @@ public abstract class Peripheral {
         LogiLED.LogiLedShutdown();
     }
 
-    public static void setColor(int r, int g, int b) {
-        prevColour = new Colour(r, g, b, 255);
+    public static void setColor(int r, int g, int b){ setColor(r, g, b, 255); }
+
+    public static void setColor(int r, int g, int b, int a) {
+        prevColour = new Colour(r, g, b, a);
         double red = (double)r/255.0;
         double green = (double)g/255.0;
         double blue = (double)b/255.0;
