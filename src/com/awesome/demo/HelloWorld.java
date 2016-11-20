@@ -1,29 +1,75 @@
-package com.awesome;
+package com.awesome.demo;
+
+import com.awesome.cognitive.Colour;
 import com.awesome.cognitive.Colours;
 import com.awesome.cognitive.Emotion;
 import com.awesome.cognitive.EmotionEnum;
-import com.awesome.cognitive.Colour;
-
-import java.lang.Thread;
-
 import com.awesome.hardware.*;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
-import javax.swing.*;
+public class HelloWorld extends Application {
 
-public class Main {
-
-    private static final boolean hardware_on = false;
     private static final long delay = 100;
+    private static final boolean hardware_on = false;
 
+    @Override
+    public void start(Stage primaryStage) {
+
+        Button btnWebCam = new Button();
+        btnWebCam.setText("Run webcam emotion analysis");
+        btnWebCam.setOnAction(event ->  {
+            testEmotionRecognition();
+        });
+
+        Button runThroughEmotions = new Button();
+        runThroughEmotions.setText("Run through emotions");
+        runThroughEmotions.setOnAction(event -> {
+            runThroughEmotions();
+        });
+
+        Button testBanner = new Button();
+        testBanner.setText("Run arrow banner");
+        testBanner.setOnAction(event -> {
+            testBanner(KeyboardPresets.ARROW_RIGHT);
+        });
+
+        Button trailingKeys = new Button();
+        trailingKeys.setText("Run trailing keys");
+        trailingKeys.setOnAction(event -> {
+
+        });
+
+        VBox root = new VBox(16);
+        root.getChildren().addAll(btnWebCam, runThroughEmotions, testBanner, trailingKeys);
+        root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(16));
+
+        Scene scene = new Scene(root, 300, 250);
+
+        primaryStage.setTitle("Demo !");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
     public static void main(String[] args) {
-        // write your code here
-        WebcamSupport.init();
-        WebcamSupport.showWebCamLiveFeed();
-        JFrame f=new JFrame();
-        f.addKeyListener(new MyKeyListener());
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
+        launch(args);
+    }
 
+
+    private static void testBanner(byte[][] drawing) {
+        Keyboard.bannerFullSpinRight(drawing, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR), 20000);
+    }
+
+    private static void testEmotionRecognition() {
+        WebcamSupport.showWebCamLiveFeed();
+
+        WebcamSupport.init();
 
         if(hardware_on) {
             Keyboard.init();
@@ -31,24 +77,6 @@ public class Main {
             Headset.init();
         }
 
-        testEmotionRecognition();
-
-        //runThroughEmotions();
-
-        //0Keyboard.setDrawing(KeyboardPresets.ARROW_RIGHT, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR));
-        //testBanner(KeyboardPresets.ARROW_RIGHT);
-
-        //Keyboard.shutdown();
-        //Mouse.shutdown();
-        //eHeadset.shutdown();
-
-    }
-
-    private static void testBanner(byte[][] drawing) {
-        Keyboard.bannerFullSpinRight(drawing, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR), 20000);
-    }
-
-    private static void testEmotionRecognition() {
         try {
 
             while (true) {
@@ -60,9 +88,7 @@ public class Main {
                 if (!s.equalsIgnoreCase("")) {
 
                     try {
-
-                        //Colour c = Colours.generateColour(s);
-                        Colour c = Colours.historyMeanColour(s);
+                        Colour c = Colours.multiConvert(s);
                         System.out.println(c.toString());
 
                         if(hardware_on) {
