@@ -44,7 +44,7 @@ public class Keyboard extends Peripheral{
 
             }
         }
-        //printByteArray(drawing);
+
         LogiLED.LogiLedSetLightingFromBitmap(RGBAarray);
     }
 

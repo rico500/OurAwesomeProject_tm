@@ -4,19 +4,27 @@ import com.awesome.cognitive.Emotion;
 import com.awesome.cognitive.EmotionEnum;
 import com.awesome.cognitive.Colour;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.lang.Thread;
 
 import com.awesome.hardware.*;
 
+import javax.swing.*;
+
 public class Main {
 
-    private static final boolean hardware_on = false;
-    private static final long delay = 100;
+    private static final boolean hardware_on = true;
+    private static final long delay = 35;
 
     public static void main(String[] args) {
 	// write your code here
         //WebcamSupport.init();
         //WebcamSupport.showWebCamLiveFeed();
+        JFrame f=new JFrame();
+        f.addKeyListener(new MyKeyListener());
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
 
         if(hardware_on) {
             Keyboard.init();
@@ -28,11 +36,12 @@ public class Main {
 
         //runThroughEmotions();
 
+        //0Keyboard.setDrawing(KeyboardPresets.ARROW_RIGHT, Colours.singleEmotion(EmotionEnum.ANGER), Colours.singleEmotion(EmotionEnum.FEAR));
         testBanner(KeyboardPresets.ARROW_RIGHT);
 
-        Keyboard.shutdown();
-        Mouse.shutdown();
-        Headset.shutdown();
+        //Keyboard.shutdown();
+        //Mouse.shutdown();
+        //eHeadset.shutdown();
 
     }
 
