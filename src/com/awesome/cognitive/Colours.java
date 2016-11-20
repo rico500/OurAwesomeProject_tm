@@ -1,10 +1,23 @@
 package com.awesome.cognitive;
 
 import org.json.*;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Deque;
+
 /**
  * Created by ignat on 20/11/2016.
  */
 public class Colours {
+
+
+
+    private static final int emotionQueueLength = 10;
+    private static int[] emotionCounter = {0, 0, 0, 0, 0, 0, 0, 0};
+    //private static FIFO<EmotionEnum> emotionArray = new FIFO(EmotionEnum, emotionArrayLength);
+    private static Queue<EmotionEnum> emotionQueue = new ArrayDeque<>();
+    private static int emotionQueueCounter = 0;
 
     /**
      *
@@ -43,6 +56,37 @@ public class Colours {
         cs[7].scale = js.getJSONObject("scores").getDouble("surprise");
 
         return Colour.scaleAdd(cs);
+    }
+
+    public static Colour historyDominantColour(String jsonString){
+
+        // Declare variables
+        EmotionEnum latestEmotion = singleConvert(jsonString);
+        int dominantEmotionIndex = 0;
+        if(emotionQueueCounter < emotionQueueLength-1) {
+            emotionQueue.add(latestEmotion);
+            emotionCounter[latestEmotion.ordinal()]++;
+            emotionQueueCounter++;
+        }else{
+            emotionCounter[emotionQueue.remove().ordinal()]--;
+            emotionQueue.add(latestEmotion);
+            emotionCounter[latestEmotion.ordinal()]++;
+        }
+
+        for(int i=0; i < emotionCounter.length; i++){
+            if(emotionCounter[i] > emotionCounter[dominantEmotionIndex]){
+                dominantEmotionIndex = i;
+            }
+        }
+
+        // print all emotions in Deque
+        for(EmotionEnum e : emotionQueue){
+            System.out.print(e.name() + " ");
+        }
+        System.out.println();
+
+        return singleEmotion(EmotionEnum.values()[dominantEmotionIndex]);
+
     }
 
     /**
@@ -119,6 +163,5 @@ public class Colours {
         }
         return c;
     }
-
 
 }

@@ -14,8 +14,8 @@ import javax.swing.*;
 
 public class Main {
 
-    private static final boolean hardware_on = true;
-    private static final long delay = 35;
+    private static final boolean hardware_on = false;
+    private static final long delay = 100;
 
     public static void main(String[] args) {
 	// write your code here
